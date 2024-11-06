@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Verificar si el usuario es 'duki' y la contraseña es '12345'
-    if (username === 'duki' && password === '12345') {
+    if (username === "duki" && password === "12345") {
       // Si es correcto, redirigir al panel de administración
-      navigate('/admin-panel');
+      navigate("/admin-panel");
     } else {
       // Si es incorrecto, mostrar un mensaje de error
-      alert('Usuario o contraseña incorrectos');
+      alert("Usuario o contraseña incorrectos");
     }
   };
 
@@ -26,12 +26,17 @@ const Login = () => {
         <div className="absolute top-0 left-0 w-40 h-40 bg-purple-600 rounded-full blur-3xl opacity-30 -z-10"></div>
         <div className="absolute bottom-0 right-0 w-40 h-40 bg-sky-400 rounded-full blur-3xl opacity-30 -z-10"></div>
 
-        <h2 className="text-3xl font-bold text-white text-center mb-8">Iniciar Sesión</h2>
-        
+        <h2 className="text-3xl font-bold text-white text-center mb-8">
+          Iniciar Sesión
+        </h2>
+
         <form onSubmit={handleLogin} className="space-y-6">
           {/* Campo de usuario */}
           <div>
-            <label className="block text-sm font-medium text-gray-300" htmlFor="username">
+            <label
+              className="block text-sm font-medium text-gray-300"
+              htmlFor="username"
+            >
               Usuario
             </label>
             <input
@@ -47,7 +52,10 @@ const Login = () => {
 
           {/* Campo de contraseña */}
           <div>
-            <label className="block text-sm font-medium text-gray-300" htmlFor="password">
+            <label
+              className="block text-sm font-medium text-gray-300"
+              htmlFor="password"
+            >
               Contraseña
             </label>
             <input

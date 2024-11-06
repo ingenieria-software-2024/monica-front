@@ -1,23 +1,33 @@
-import { useCart } from '../context/CartContext'; // Asegúrate de la ruta correcta al CartContext
+import { useCart } from "../context/CartContext"; // Asegúrate de la ruta correcta al CartContext
 
 const Cart = () => {
   const { cart, removeFromCart, addToCart } = useCart(); // Obtén los datos del carrito
 
   return (
     <div className="container mx-auto my-10">
-      <h2 className="text-3xl font-bold mb-6 mt-16">Carrito de Compras</h2> {/* Agregar margen superior */}
+      <h2 className="text-3xl font-bold mb-6 mt-16">Carrito de Compras</h2>{" "}
+      {/* Agregar margen superior */}
       {cart.length === 0 ? (
         <p>Tu carrito está vacío.</p>
       ) : (
         <div>
           <ul>
             {cart.map((item) => (
-              <li key={item.id} className="flex justify-between items-center mb-4">
+              <li
+                key={item.id}
+                className="flex justify-between items-center mb-4"
+              >
                 <div className="flex items-center gap-4">
-                  <img src={item.imageUrl} alt={item.name} className="w-16 h-16 object-cover" />
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover"
+                  />
                   <div>
                     <p className="font-bold">{item.name}</p>
-                    <p className="text-sm text-gray-600">Precio: ${item.price}</p>
+                    <p className="text-sm text-gray-600">
+                      Precio: ${item.price}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -43,7 +53,9 @@ const Cart = () => {
             ))}
           </ul>
           <button
-            onClick={() => {/* Lógica para comprar */}} 
+            onClick={() => {
+              /* Lógica para comprar */
+            }}
             className="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl text-lg text-gray-50 bg-[#0A0D2D] backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group mt-6"
             type="submit"
           >

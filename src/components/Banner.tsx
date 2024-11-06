@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-const images = [
-  '/images/1.jpg',
-  '/images/2.jpg',
-  '/images/3.jpg'
-];
+const images = ["/images/1.jpg", "/images/2.jpg", "/images/3.jpg"];
 
 const Banner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,9 +14,17 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative bg-cover bg-center" style={{ backgroundImage: `url(${images[currentIndex]})`, height: '700px' }}>
+    <div
+      className="relative bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${images[currentIndex]})`,
+        height: "700px",
+      }}
+    >
       <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
-        <h1 className="text-white text-4xl font-bold">Bienvenido a nuestra tienda</h1>
+        <h1 className="text-white text-4xl font-bold">
+          Bienvenido a nuestra tienda
+        </h1>
       </div>
     </div>
   );
