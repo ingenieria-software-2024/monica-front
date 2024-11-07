@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSession } from "../context/UserContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Estado para manejar el menú hamburguesa
   const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+
+  const { user } = useSession();
 
   const handleToggle = () => {
     setIsOpen(!isOpen); // Cambiar el estado del menú hamburguesa
@@ -72,7 +75,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/login">Iniciar Sesión</Link>
+            {user?.username ? (
+              <p>{user.username}</p>
+            ) : (
+              <Link to="/login">Iniciar Sesión</Link>
+            )}
           </li>{" "}
           {/* Enlace a login */}
           <li>

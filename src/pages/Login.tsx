@@ -1,22 +1,42 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/auth.service";
+import { useSession } from "../context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  /** Estado que controla si se esta logeando al usuario. */
+  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
+
+  const { setToken } = useSession();
+
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Verificar si el usuario es 'duki' y la contraseña es '12345'
-    if (username === "duki" && password === "12345") {
-      // Si es correcto, redirigir al panel de administración
-      navigate("/admin-panel");
-    } else {
-      // Si es incorrecto, mostrar un mensaje de error
-      alert("Usuario o contraseña incorrectos");
+    if (isLoggingIn) return;
+
+    setIsLoggingIn(true);
+
+    try {
+      // Loguear al usuario.
+      const token = await login(username, password);
+
+      // Settear la sesion del usuario.
+      setToken(token);
+
+      navigate("/");
+    } catch (e: any) {
+      console.error(e);
+      alert(
+        `Fallo al iniciar sesion: ${e?.response?.data?.message ?? e?.message}`
+      );
     }
+
+    setIsLoggingIn(false);
   };
 
   return (
