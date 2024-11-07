@@ -14,6 +14,7 @@
     "@nestjs/core": "^10.4.6",
     "@nestjs/platform-express": "^10.4.6",
     "@prisma/client": "^5.21.1",
+    "axios": "^1.7.7",
     "class-validator": "^0.14.1",
     "next": "^14.2.13",
     "prettier": "^3.3.3",
