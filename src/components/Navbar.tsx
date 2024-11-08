@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSession } from "../context/UserContext";
+import { Profile } from "./NavBar/Profile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Estado para manejar el menú hamburguesa
@@ -76,7 +77,7 @@ const Navbar = () => {
           </li>
           <li>
             {user?.username ? (
-              <p>{user.username}</p>
+              <Profile user={user} />
             ) : (
               <Link to="/login">Iniciar Sesión</Link>
             )}
