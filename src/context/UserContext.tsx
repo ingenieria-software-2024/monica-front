@@ -24,6 +24,13 @@ interface UserContextType {
    * @returns {Promise<boolean>}
    */
   validateSession: () => Promise<boolean>;
+
+  /**
+   * Cierra la sesion del usuario.
+   *
+   * @returns {void}
+   */
+  logout: () => void;
 }
 
 export const UserContext = createContext<UserContextType>(
@@ -71,6 +78,16 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }
 
+  function logout() {
+    // Limpiar datos del usuario.
+    localStorage.removeItem("token");
+    setToken("");
+    setUser(null);
+
+    // Redireccionar a la pagina de inicio.
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     if (!token || !token?.length) {
       // Fijarse si hay token en el local storage.
@@ -84,11 +101,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     async function validateLocalStorageToken() {
       const isValid = await validateSession();
 
+      console.log(isValid, token);
+
       if (!isValid) {
-        // Limpiar datos del usuario.
-        localStorage.removeItem("token");
-        setToken("");
-        setUser(null);
+        logout();
 
         return;
       }
@@ -128,6 +144,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         token,
         setToken: setAndValidateToken,
         validateSession,
+        logout,
       }}
     >
       {children}

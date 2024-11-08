@@ -1,12 +1,15 @@
 import { UserSession } from "../../types/user/user.types";
 import { Dropdown, DropdownDivider, DropdownItem } from "flowbite-react";
 import { UserProfile } from "../Icons/UserProfile";
+import { useSession } from "../../context/UserContext";
 
 type ProfileProps = {
   user: UserSession;
 };
 
 export function Profile({ user }: ProfileProps) {
+  const { logout } = useSession();
+
   return (
     <Dropdown
       className="p-2"
@@ -21,7 +24,7 @@ export function Profile({ user }: ProfileProps) {
     >
       <p className="text-xs text-slate-800">{user?.email}</p>
       <DropdownDivider />
-      <DropdownItem>Cerrar Sesion</DropdownItem>
+      <DropdownItem onClick={logout}>Cerrar Sesion</DropdownItem>
     </Dropdown>
   );
 }

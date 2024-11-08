@@ -43,7 +43,7 @@ export async function login(
 export async function validateUserSession(token: string): Promise<boolean> {
   try {
     // Validar la token.
-    await axios({
+    const { data } = await axios<boolean>({
       method: "POST",
       url: `${BASE_URL}/auth/validate`,
       data: {
@@ -51,7 +51,7 @@ export async function validateUserSession(token: string): Promise<boolean> {
       },
     });
 
-    return true;
+    return data;
   } catch (e: any) {
     console.error(
       `Fallo al validar la sesion: ${e?.response?.data ? JSON.stringify(e.response.data) : e}`
