@@ -1,46 +1,62 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const initialProducts = [
-  { id: 1, name: 'iPhone 16', price: 999 },
-  { id: 2, name: 'MacBook Pro', price: 1999 },
-  { id: 3, name: 'Apple Watch', price: 399 },
-  { id: 4, name: 'iPad Pro', price: 1099 },
+  { id: 1, name: "iPhone 16", price: 999 },
+  { id: 2, name: "MacBook Pro", price: 1999 },
+  { id: 3, name: "Apple Watch", price: 399 },
+  { id: 4, name: "iPad Pro", price: 1099 },
 ];
 
 const AdminPanel = () => {
   const [products, setProducts] = useState(initialProducts);
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [editingProduct, setEditingProduct] = useState<null | { id: number; name: string; price: number }>(null);
-  const [filter, setFilter] = useState(''); // Estado para el filtro
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [editingProduct, setEditingProduct] = useState<null | {
+    id: number;
+    name: string;
+    price: number;
+  }>(null);
+  const [filter, setFilter] = useState(""); // Estado para el filtro
 
   const addProduct = () => {
     if (editingProduct) {
-      const updatedProducts = products.map(product =>
-        product.id === editingProduct.id ? { ...product, name, price: parseFloat(price) } : product
+      const updatedProducts = products.map((product) =>
+        product.id === editingProduct.id
+          ? { ...product, name, price: parseFloat(price) }
+          : product,
       );
       setProducts(updatedProducts);
       setEditingProduct(null);
     } else {
-      const newProduct = { id: products.length + 1, name, price: parseFloat(price) };
+      const newProduct = {
+        id: products.length + 1,
+        name,
+        price: parseFloat(price),
+      };
       setProducts([...products, newProduct]);
     }
-    setName('');
-    setPrice('');
+    setName("");
+    setPrice("");
   };
 
   const deleteProduct = (id: number) => {
-    setProducts(products.filter(product => product.id !== id));
+    setProducts(products.filter((product) => product.id !== id));
   };
 
-  const editProduct = (product: { id: number; name: string; price: number }) => {
+  const editProduct = (product: {
+    id: number;
+    name: string;
+    price: number;
+  }) => {
     setName(product.name);
     setPrice(product.price.toString());
     setEditingProduct(product);
   };
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(filter.toLowerCase()) || product.price.toString().includes(filter)
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(filter.toLowerCase()) ||
+      product.price.toString().includes(filter),
   );
 
   return (
@@ -68,7 +84,7 @@ const AdminPanel = () => {
           className="bg-green-700 text-green-400 border border-green-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
         >
           <span className="bg-green-400 shadow-green-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
-          {editingProduct ? 'Actualizar Producto' : 'Agregar Producto'}
+          {editingProduct ? "Actualizar Producto" : "Agregar Producto"}
         </button>
       </div>
 
@@ -85,9 +101,14 @@ const AdminPanel = () => {
 
       {/* Listado de productos filtrados */}
       <ul>
-        {filteredProducts.map(product => (
-          <li key={product.id} className="flex justify-between items-center bg-gray-800 p-4 mb-2 rounded-md">
-            <span>{product.name} - ${product.price}</span>
+        {filteredProducts.map((product) => (
+          <li
+            key={product.id}
+            className="flex justify-between items-center bg-gray-800 p-4 mb-2 rounded-md"
+          >
+            <span>
+              {product.name} - ${product.price}
+            </span>
             <div className="flex space-x-2">
               {/* Botón Editar */}
               <button
